@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine?</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #e57373, #f48fb1);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+        .container {
+            position: relative;
+        }
+        .heart {
+            position: absolute;
+            color: #fff;
+            font-size: 20px;
+            animation: floatUp 4s infinite ease-in-out;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-100vh); opacity: 0; }
+        }
+        .question, .confirmation, .final-yes {
+            display: none;
+            font-size: 24px;
+            color: white;
+            margin-top: 20px;
+        }
+        .btn {
+            padding: 15px 30px;
+            font-size: 20px;
+            background-color: #d81b60;
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 30px;
+            transition: 0.3s;
+            margin: 10px;
+        }
+        .btn:hover {
+            background-color: #c2185b;
+        }
+        .image-container {
+            display: none;
+        }
+        .image-container img {
+            max-width: 200px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <audio autoplay loop>
+        <source src="gg.mp3" type="audio/mpeg">
+    </audio>
+    <div class="container">
+        <button class="btn" onclick="showQuestion()">Click Me 💕</button>
+        <div id="question" class="question">Will you be my Valentine? ❤️
+            <br>
+            <button class="btn" onclick="showYes()">Yes! 😊</button>
+            <button class="btn" onclick="showConfirmation()">No 😢</button>
+        </div>
+        <div class="confirmation">Are you really sure? 😞
+            <br>
+            <div class="image-container">
+                <img id="sadCat" src="https://media.tenor.com/NT0uKZ2QNqcAAAAe/kitten-sad-cat.png" alt="Sad Cat">
+            </div>
+            <button class="btn" id="trickyYes" onmouseover="teleportMouse()">Yes... 😔</button>
+            <button class="btn" onclick="showQuestion()">No! 💖</button>
+        </div>
+        <div class="final-yes">This is the Best Day Of My Life 🎉🎉🎉
+            <br>
+            <img  class="image" id="happyDog" src="images/045457cb890b54da8a256adcd2f3f0c2.png" alt="Happy Dog">
+        </div>
+    </div>
+    <script>
+        function showQuestion() {
+            document.querySelector('.question').style.display = 'block';
+            document.querySelector('.confirmation').style.display = 'none';
+            document.querySelector('.final-yes').style.display = 'none';
+        }
+        
+        function showYes() {
+            document.querySelector('.question').style.display = 'none';
+            document.querySelector('.final-yes').style.display = 'block';
+            document.querySelector('.image-container').style.display = 'block';
+            const yesMessage = document.getElementById("question");
+            yesMessage.textContent = "VAMOSSSSSS, entao espero-te no dia 14 gatinhaaaa😘😘";
+            yesMessage.style.display = "block";
+            yesMessage.style.fontStyle = "normal";
+            document.getElementsByClassName("image")[0].src = "images/1.gif";
+        }
+        
+        function showConfirmation() {
+            document.querySelector('.question').style.display = 'none';
+            document.querySelector('.confirmation').style.display = 'block';
+            document.querySelector('.image-container').style.display = 'block';
+        }
+        
+        function teleportMouse() {
+            const x = Math.random() * window.innerWidth;
+            const y = Math.random() * window.innerHeight;
+            const btn = document.getElementById('trickyYes');
+            btn.style.position = 'absolute';
+            btn.style.left = `${x}px`;
+            btn.style.top = `${y}px`;
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+            document.body.appendChild(heart);
+            setTimeout(() => { heart.remove(); }, 4000);
+        }
+        setInterval(createHeart, 500);
+    </script>
+</body>
+</html>
